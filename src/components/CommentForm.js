@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   createCommentIsPending,
+  postCommentForArticleId
 } from '../features/comments/commentsSlice';
 
 export default function CommentForm({ articleId }) {
   const dispatch = useDispatch();
   const [comment, setComment] = useState('');
   // Declare isCreatePending here.
-
+  const isCreatePending = useSelector(createCommentIsPending)
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch your asynchronous action here!
-
+    dispatch(postCommentForArticleId({ articleId, comment }));
     setComment('');
   };
 
